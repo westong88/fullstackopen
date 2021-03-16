@@ -1,0 +1,4 @@
+new notes is updated in rerender
+
+browser->server: HTTP POST
+server->browser: new note stored in db
