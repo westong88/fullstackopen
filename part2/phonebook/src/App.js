@@ -16,16 +16,14 @@ const App = () => {
   const [notificationType, setNotificationType] = useState('')
   var i = 1
 
-  const hook = () => {
-    console.log('effect')
-    axios
-      .get('http://localhost:3001/persons')
+  useEffect(() => {
+    personService
+      .getAll()
       .then(response => {
         console.log('promise fulfilled')
-        setPersons(response.data)
+        setPersons(response)
       })
-  }
-  useEffect(hook, [])
+  }, [])
   console.log('render', persons.length, 'persons')
 
   const handleNameChange = (event) => {
@@ -69,7 +67,7 @@ const App = () => {
       personService
         .create(newPerson)
         .then(response => {
-          setPersons(persons.concat(response))
+          setPersons(persons.concat(newPerson))
           setNotificationType('success')
           setMessage(
             `Added ${newPerson.name}`
